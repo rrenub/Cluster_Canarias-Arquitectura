@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.astrobookings.persistence.interfaces.RocketRepository;
 import com.astrobookings.persistence.models.Rocket;
 
-public class RocketRepository {
+public class InMemoryRocketRepository implements RocketRepository{
   private static final Map<String, Rocket> rockets = new HashMap<>();
   private static int nextId = 1;
 

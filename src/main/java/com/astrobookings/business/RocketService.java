@@ -2,11 +2,12 @@ package com.astrobookings.business;
 
 import java.util.List;
 
+import com.astrobookings.business.interfaces.IRocketService;
 import com.astrobookings.business.models.RocketDto;
-import com.astrobookings.persistence.RocketRepository;
+import com.astrobookings.persistence.interfaces.RocketRepository;
 import com.astrobookings.persistence.models.Rocket;
 
-public class RocketService {
+public class RocketService implements IRocketService {
     private final RocketRepository rocketRepository;
 
     public RocketService(RocketRepository rocketRepository) {

@@ -4,20 +4,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import com.astrobookings.business.FlightService;
-import com.astrobookings.business.RocketService;
+import com.astrobookings.business.interfaces.IRocketService;
 import com.astrobookings.business.models.RocketDto;
-import com.astrobookings.persistence.FlightRepository;
-import com.astrobookings.persistence.RocketRepository;
-import com.astrobookings.persistence.models.Rocket;
 import com.sun.net.httpserver.HttpExchange;
 
 public class RocketHandler extends BaseHandler {
-  private final RocketService rocketService;
+  private final IRocketService rocketService;
 
-  public RocketHandler() {
-    RocketRepository rocketRepository = new RocketRepository();
-    this.rocketService = new RocketService(rocketRepository);
+  public RocketHandler(IRocketService rocketService) {
+    this.rocketService = rocketService;
   }
 
   @Override
@@ -69,7 +64,7 @@ public class RocketHandler extends BaseHandler {
         statusCode = 201;
         response = this.objectMapper.writeValueAsString(saved);
       }
-      
+
     } catch (Exception e) {
       statusCode = 400;
       response = "{\"error\": \"Invalid JSON or request\"}";

@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.astrobookings.persistence.BookingRepository;
 import com.astrobookings.persistence.FlightRepository;
-import com.astrobookings.persistence.RocketRepository;
+import com.astrobookings.persistence.InMemoryRocketRepository;
 import com.astrobookings.persistence.models.Booking;
 import com.astrobookings.persistence.models.Flight;
 import com.astrobookings.persistence.models.FlightStatus;
@@ -16,11 +16,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class BookingService {
   private final BookingRepository bookingRepository;
   private final FlightRepository flightRepository;
-  private final RocketRepository rocketRepository;
+  private final InMemoryRocketRepository rocketRepository;
   private final ObjectMapper objectMapper = new ObjectMapper();
 
   public BookingService(BookingRepository bookingRepository, FlightRepository flightRepository,
-      RocketRepository rocketRepository) {
+      InMemoryRocketRepository rocketRepository) {
     this.bookingRepository = bookingRepository;
     this.flightRepository = flightRepository;
     this.rocketRepository = rocketRepository;
