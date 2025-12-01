@@ -71,6 +71,8 @@ public class BookingHandler extends BaseHandler {
       String body = new String(is.readAllBytes(), StandardCharsets.UTF_8);
       JsonNode jsonNode = this.objectMapper.readTree(body);
 
+      // TODO: Crear DTO
+
       String flightId = jsonNode.get("flightId").asText();
       String passengerName = jsonNode.get("passengerName").asText();
 
@@ -85,6 +87,9 @@ public class BookingHandler extends BaseHandler {
         response = bookingService.createBooking(flightId, passengerName);
       }
     } catch (IllegalArgumentException e) {
+
+      // TODO: Mejorar excepción
+
       String error = e.getMessage();
       if (error.contains("not found")) {
         statusCode = 404;

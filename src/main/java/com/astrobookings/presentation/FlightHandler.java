@@ -65,11 +65,16 @@ public class FlightHandler extends BaseHandler {
       // Parse JSON body
       InputStream is = exchange.getRequestBody();
       String body = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+
+      // TODO: Validar objeto Flight DTO
+
       Flight flight = this.objectMapper.readValue(body, Flight.class);
 
       Flight saved = flightService.createFlight(flight);
       response = this.objectMapper.writeValueAsString(saved);
     } catch (IllegalArgumentException e) {
+
+      // TODO: Excepción NotFound en lugar de parsear texto
       String error = e.getMessage();
       if (error.contains("does not exist")) {
         statusCode = 404;
