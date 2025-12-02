@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.astrobookings.domain.ports.FlightRepository;
 import com.astrobookings.infrastructure.models.Flight;
 import com.astrobookings.infrastructure.models.FlightStatus;
 
-public class FlightRepository {
+public class InMemoryFlightRepository implements FlightRepository{
   private static final Map<String, Flight> flights = new HashMap<>();
   private static int nextId = 1;
 

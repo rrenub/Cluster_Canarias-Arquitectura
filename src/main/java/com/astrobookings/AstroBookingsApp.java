@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import com.astrobookings.config.AppFactory;
-import com.astrobookings.domain.ports.RocketRepository;
+import com.astrobookings.domain.ports.BookingServiceContract;
+import com.astrobookings.domain.ports.FlightServiceContract;
 import com.astrobookings.domain.ports.RocketServiceContract;
-import com.astrobookings.infrastructure.InMemoryRocketRepository;
 import com.astrobookings.presentation.AdminHandler;
 import com.astrobookings.presentation.BookingHandler;
 import com.astrobookings.presentation.FlightHandler;
@@ -22,11 +22,13 @@ public class AstroBookingsApp {
 
     // Create services
     RocketServiceContract rocketService = appFactory.createRocketService();
+    FlightServiceContract flightService = appFactory.createFlightService();
+    BookingServiceContract bookingService = appFactory.createBookingService();
 
     // Register handlers for endpoints
     server.createContext("/rockets", new RocketHandler(rocketService));
-    server.createContext("/flights", new FlightHandler());
-    server.createContext("/bookings", new BookingHandler());
+    server.createContext("/flights", new FlightHandler(flightService));
+    server.createContext("/bookings", new BookingHandler(bookingService));
     server.createContext("/admin/cancel-flights", new AdminHandler());
 
     // Start server

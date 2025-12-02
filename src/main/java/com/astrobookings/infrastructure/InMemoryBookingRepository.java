@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.astrobookings.domain.ports.BookingRepository;
 import com.astrobookings.infrastructure.models.Booking;
 
-public class BookingRepository {
+public class InMemoryBookingRepository implements BookingRepository{
   private static final Map<String, Booking> bookings = new HashMap<>();
   private static int nextId = 1;
 

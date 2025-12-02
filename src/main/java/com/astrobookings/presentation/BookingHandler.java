@@ -6,22 +6,15 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.astrobookings.domain.BookingService;
-import com.astrobookings.infrastructure.BookingRepository;
-import com.astrobookings.infrastructure.FlightRepository;
-import com.astrobookings.infrastructure.InMemoryRocketRepository;
+import com.astrobookings.domain.ports.BookingServiceContract;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.net.httpserver.HttpExchange;
 
 public class BookingHandler extends BaseHandler {
-  private final BookingService bookingService;
+  private final BookingServiceContract bookingService;
 
-  public BookingHandler() {
-    BookingRepository bookingRepository = new BookingRepository();
-    FlightRepository flightRepository = new FlightRepository();
-    InMemoryRocketRepository rocketRepository = new InMemoryRocketRepository();
-    this.bookingService = new BookingService(bookingRepository, flightRepository, rocketRepository);
+  public BookingHandler(BookingServiceContract bookingService) {
+    this.bookingService = bookingService;
   }
 
   @Override
