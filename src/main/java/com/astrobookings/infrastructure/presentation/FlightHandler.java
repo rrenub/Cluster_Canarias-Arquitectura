@@ -1,4 +1,4 @@
-package com.astrobookings.presentation;
+package com.astrobookings.infrastructure.presentation;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.astrobookings.domain.models.Flight;
-import com.astrobookings.domain.ports.FlightServiceContract;
-import com.astrobookings.domain.ports.RocketServiceContract;
+import com.astrobookings.domain.ports.input.FlightUseCases;
+import com.astrobookings.domain.ports.input.RocketUseCases;
 import com.sun.net.httpserver.HttpExchange;
 
 public class FlightHandler extends BaseHandler {
-  private final FlightServiceContract flightService;
+  private final FlightUseCases flightService;
 
-  public FlightHandler(FlightServiceContract flightService) {
+  public FlightHandler(FlightUseCases flightService) {
     this.flightService = flightService;
   }
 

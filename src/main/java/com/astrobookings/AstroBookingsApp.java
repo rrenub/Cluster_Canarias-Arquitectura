@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import com.astrobookings.config.AppFactory;
-import com.astrobookings.domain.ports.BookingServiceContract;
-import com.astrobookings.domain.ports.CancellationServiceContract;
-import com.astrobookings.domain.ports.FlightServiceContract;
-import com.astrobookings.domain.ports.RocketServiceContract;
-import com.astrobookings.presentation.AdminHandler;
-import com.astrobookings.presentation.BookingHandler;
-import com.astrobookings.presentation.FlightHandler;
-import com.astrobookings.presentation.RocketHandler;
+import com.astrobookings.domain.ports.input.BookingUseCases;
+import com.astrobookings.domain.ports.input.CancellationUseCases;
+import com.astrobookings.domain.ports.input.FlightUseCases;
+import com.astrobookings.domain.ports.input.RocketUseCases;
+import com.astrobookings.infrastructure.presentation.AdminHandler;
+import com.astrobookings.infrastructure.presentation.BookingHandler;
+import com.astrobookings.infrastructure.presentation.FlightHandler;
+import com.astrobookings.infrastructure.presentation.RocketHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class AstroBookingsApp {
@@ -22,10 +22,10 @@ public class AstroBookingsApp {
     AppFactory appFactory = new AppFactory();
 
     // Create services
-    RocketServiceContract rocketService = appFactory.createRocketService();
-    FlightServiceContract flightService = appFactory.createFlightService();
-    BookingServiceContract bookingService = appFactory.createBookingService();
-    CancellationServiceContract cancellationService = appFactory.createCancellationService();
+    RocketUseCases rocketService = appFactory.createRocketService();
+    FlightUseCases flightService = appFactory.createFlightService();
+    BookingUseCases bookingService = appFactory.createBookingService();
+    CancellationUseCases cancellationService = appFactory.createCancellationService();
 
     // Register handlers for endpoints
     server.createContext("/rockets", new RocketHandler(rocketService));

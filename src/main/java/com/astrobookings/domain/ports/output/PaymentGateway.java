@@ -1,6 +1,6 @@
-package com.astrobookings.domain.ports;
+package com.astrobookings.domain.ports.output;
 
-public interface PaymentGatewayContract {
+public interface PaymentGateway {
     public String processPayment(double amount) throws Exception;
     public void processRefund(String transactionId);
     public void processRefund(String transactionId, double amount);

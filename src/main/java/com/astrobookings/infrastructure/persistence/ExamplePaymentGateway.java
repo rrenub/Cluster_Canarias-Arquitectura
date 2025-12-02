@@ -1,10 +1,10 @@
-package com.astrobookings.domain;
+package com.astrobookings.infrastructure.persistence;
 
 import java.util.UUID;
 
-import com.astrobookings.domain.ports.PaymentGatewayContract;
+import com.astrobookings.domain.ports.output.PaymentGateway;
 
-public class PaymentGateway implements PaymentGatewayContract {
+public class ExamplePaymentGateway implements PaymentGateway {
   public String processPayment(double amount) throws Exception {
     System.out.println("[PAYMENT GATEWAY] Processing payment... Amount: " + amount);
     if (amount > 10000) {

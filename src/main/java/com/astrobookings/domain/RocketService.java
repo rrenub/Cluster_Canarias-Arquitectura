@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.astrobookings.domain.models.Rocket;
 import com.astrobookings.domain.models.RocketDto;
-import com.astrobookings.domain.ports.RocketRepository;
-import com.astrobookings.domain.ports.RocketServiceContract;
+import com.astrobookings.domain.ports.input.RocketUseCases;
+import com.astrobookings.domain.ports.output.RocketRepository;
 
-public class RocketService implements RocketServiceContract {
+public class RocketService implements RocketUseCases {
     private final RocketRepository rocketRepository;
 
     public RocketService(RocketRepository rocketRepository) {

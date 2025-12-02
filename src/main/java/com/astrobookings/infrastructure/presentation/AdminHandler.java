@@ -1,13 +1,14 @@
-package com.astrobookings.presentation;
+package com.astrobookings.infrastructure.presentation;
 
 import java.io.IOException;
-import com.astrobookings.domain.ports.CancellationServiceContract;
+
+import com.astrobookings.domain.ports.input.CancellationUseCases;
 import com.sun.net.httpserver.HttpExchange;
 
 public class AdminHandler extends BaseHandler {
-  private final CancellationServiceContract cancellationService;
+  private final CancellationUseCases cancellationService;
 
-  public AdminHandler(CancellationServiceContract cancellationService) {
+  public AdminHandler(CancellationUseCases cancellationService) {
     this.cancellationService = cancellationService;
   }
 

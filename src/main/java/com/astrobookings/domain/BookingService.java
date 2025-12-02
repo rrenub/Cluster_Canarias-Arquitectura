@@ -8,26 +8,30 @@ import com.astrobookings.domain.models.Booking;
 import com.astrobookings.domain.models.Flight;
 import com.astrobookings.domain.models.FlightStatus;
 import com.astrobookings.domain.models.Rocket;
-import com.astrobookings.domain.ports.BookingRepository;
-import com.astrobookings.domain.ports.BookingServiceContract;
-import com.astrobookings.domain.ports.FlightRepository;
-import com.astrobookings.domain.ports.PaymentGatewayContract;
-import com.astrobookings.domain.ports.RocketRepository;
+import com.astrobookings.domain.ports.input.BookingUseCases;
+import com.astrobookings.domain.ports.output.BookingRepository;
+import com.astrobookings.domain.ports.output.FlightRepository;
+import com.astrobookings.domain.ports.output.Notification;
+import com.astrobookings.domain.ports.output.PaymentGateway;
+import com.astrobookings.domain.ports.output.RocketRepository;
+import com.astrobookings.infrastructure.persistence.ExampleNotification;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class BookingService implements BookingServiceContract{
+public class BookingService implements BookingUseCases{
   private final BookingRepository bookingRepository;
   private final FlightRepository flightRepository;
   private final RocketRepository rocketRepository;
-  private final PaymentGatewayContract paymentGateway;
+  private final PaymentGateway paymentGateway;
+  private final Notification notification;
   private final ObjectMapper objectMapper = new ObjectMapper();
 
   public BookingService(BookingRepository bookingRepository, FlightRepository flightRepository,
-      RocketRepository rocketRepository, PaymentGatewayContract paymentGateway) {
+      RocketRepository rocketRepository, PaymentGateway paymentGateway, Notification notification) {
     this.bookingRepository = bookingRepository;
     this.flightRepository = flightRepository;
     this.rocketRepository = rocketRepository;
     this.paymentGateway = paymentGateway;
+    this.notification = notification;
   }
 
   public String createBooking(String flightId, String passengerName) throws Exception {
@@ -94,7 +98,7 @@ public class BookingService implements BookingServiceContract{
       flight.setStatus(FlightStatus.SOLD_OUT);
     } else if (currentBookings >= flight.getMinPassengers() && flight.getStatus() == FlightStatus.SCHEDULED) {
       flight.setStatus(FlightStatus.CONFIRMED);
-      NotificationService.notifyConfirmation(flightId, currentBookings);
+      notification.notifyConfirmation(flightId, currentBookings);
     }
     flightRepository.save(flight);
 

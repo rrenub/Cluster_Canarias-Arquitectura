@@ -1,4 +1,4 @@
-package com.astrobookings.presentation;
+package com.astrobookings.infrastructure.presentation;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,14 +6,15 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import com.astrobookings.domain.ports.BookingServiceContract;
+
+import com.astrobookings.domain.ports.input.BookingUseCases;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.net.httpserver.HttpExchange;
 
 public class BookingHandler extends BaseHandler {
-  private final BookingServiceContract bookingService;
+  private final BookingUseCases bookingService;
 
-  public BookingHandler(BookingServiceContract bookingService) {
+  public BookingHandler(BookingUseCases bookingService) {
     this.bookingService = bookingService;
   }
 

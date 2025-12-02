@@ -1,4 +1,4 @@
-package com.astrobookings.presentation;
+package com.astrobookings.infrastructure.presentation;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.astrobookings.domain.models.Flight;
 import com.astrobookings.domain.models.FlightStatus;
-import com.astrobookings.domain.ports.FlightRepository;
-import com.astrobookings.domain.ports.FlightServiceContract;
-import com.astrobookings.domain.ports.RocketRepository;
+import com.astrobookings.domain.ports.input.FlightUseCases;
+import com.astrobookings.domain.ports.output.FlightRepository;
+import com.astrobookings.domain.ports.output.RocketRepository;
 
-public class FlightService implements FlightServiceContract {
+public class FlightService implements FlightUseCases {
   private final FlightRepository flightRepository;
   private final RocketRepository rocketRepository;
 

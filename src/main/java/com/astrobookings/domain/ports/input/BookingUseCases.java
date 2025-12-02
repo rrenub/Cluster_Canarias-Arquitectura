@@ -1,6 +1,6 @@
-package com.astrobookings.domain.ports;
+package com.astrobookings.domain.ports.input;
 
-public interface BookingServiceContract {
+public interface BookingUseCases {
     public String createBooking(String flightId, String passengerName) throws Exception;
     public String getBookings(String flightId, String passengerName) throws Exception;
 }

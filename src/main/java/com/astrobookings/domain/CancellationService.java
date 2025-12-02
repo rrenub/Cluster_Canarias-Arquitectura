@@ -7,20 +7,24 @@ import java.util.List;
 import com.astrobookings.domain.models.Booking;
 import com.astrobookings.domain.models.Flight;
 import com.astrobookings.domain.models.FlightStatus;
-import com.astrobookings.domain.ports.BookingRepository;
-import com.astrobookings.domain.ports.CancellationServiceContract;
-import com.astrobookings.domain.ports.FlightRepository;
-import com.astrobookings.domain.ports.PaymentGatewayContract;
+import com.astrobookings.domain.ports.input.CancellationUseCases;
+import com.astrobookings.domain.ports.output.BookingRepository;
+import com.astrobookings.domain.ports.output.FlightRepository;
+import com.astrobookings.domain.ports.output.Notification;
+import com.astrobookings.domain.ports.output.PaymentGateway;
 
-public class CancellationService implements CancellationServiceContract{
+public class CancellationService implements CancellationUseCases{
   private final FlightRepository flightRepository;
   private final BookingRepository bookingRepository;
-  private final PaymentGatewayContract paymentGateway;
+  private final PaymentGateway paymentGateway;
+  private final Notification notification;
 
-  public CancellationService(FlightRepository flightRepository, BookingRepository bookingRepository, PaymentGatewayContract paymentGateway) {
+  public CancellationService(FlightRepository flightRepository, BookingRepository bookingRepository, 
+      PaymentGateway paymentGateway, Notification notification) {
     this.flightRepository = flightRepository;
     this.bookingRepository = bookingRepository;
     this.paymentGateway = paymentGateway;
+    this.notification = notification;
   }
 
   public String cancelFlights() throws Exception {
@@ -46,7 +50,7 @@ public class CancellationService implements CancellationServiceContract{
             }
 
             // Notify
-            NotificationService.notifyCancellation(flight.getId(), bookings);
+            notification.notifyCancellation(flight.getId(), bookings);
             cancelledCount++;
           }
         }

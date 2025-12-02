@@ -1,17 +1,17 @@
-package com.astrobookings.presentation;
+package com.astrobookings.infrastructure.presentation;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import com.astrobookings.domain.models.RocketDto;
-import com.astrobookings.domain.ports.RocketServiceContract;
+import com.astrobookings.domain.ports.input.RocketUseCases;
 import com.sun.net.httpserver.HttpExchange;
 
 public class RocketHandler extends BaseHandler {
-  private final RocketServiceContract rocketService;
+  private final RocketUseCases rocketService;
 
-  public RocketHandler(RocketServiceContract rocketService) {
+  public RocketHandler(RocketUseCases rocketService) {
     this.rocketService = rocketService;
   }
 
