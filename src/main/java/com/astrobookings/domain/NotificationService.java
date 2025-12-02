@@ -2,7 +2,7 @@ package com.astrobookings.domain;
 
 import java.util.List;
 
-import com.astrobookings.infrastructure.models.Booking;
+import com.astrobookings.domain.models.Booking;
 
 public class NotificationService {
   public static void notifyConfirmation(String flightId, int passengerCount) {

@@ -3,11 +3,11 @@ package com.astrobookings.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.astrobookings.domain.models.Flight;
+import com.astrobookings.domain.models.FlightStatus;
 import com.astrobookings.domain.ports.FlightRepository;
 import com.astrobookings.domain.ports.FlightServiceContract;
 import com.astrobookings.domain.ports.RocketRepository;
-import com.astrobookings.infrastructure.models.Flight;
-import com.astrobookings.infrastructure.models.FlightStatus;
 
 public class FlightService implements FlightServiceContract {
   private final FlightRepository flightRepository;
@@ -42,17 +42,6 @@ public class FlightService implements FlightServiceContract {
   }
 
   private String validateFlight(Flight flight) {
-    // Input structure validations
-    if (flight.getRocketId() == null || flight.getRocketId().trim().isEmpty()) {
-      return "Rocket ID must be provided";
-    }
-    if (flight.getDepartureDate() == null) {
-      return "Departure date must be provided";
-    }
-    if (flight.getBasePrice() <= 0) {
-      return "Base price must be positive";
-    }
-
     // Business validations
     if (rocketRepository.findAll().stream().noneMatch(r -> r.getId().equals(flight.getRocketId()))) {
       return "Rocket with id " + flight.getRocketId() + " does not exist";

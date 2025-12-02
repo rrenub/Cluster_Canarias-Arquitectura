@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import com.astrobookings.domain.models.Booking;
+import com.astrobookings.domain.models.Flight;
+import com.astrobookings.domain.models.FlightStatus;
 import com.astrobookings.domain.ports.BookingRepository;
 import com.astrobookings.domain.ports.CancellationServiceContract;
 import com.astrobookings.domain.ports.FlightRepository;
 import com.astrobookings.domain.ports.PaymentGatewayContract;
-import com.astrobookings.infrastructure.models.Booking;
-import com.astrobookings.infrastructure.models.Flight;
-import com.astrobookings.infrastructure.models.FlightStatus;
 
 public class CancellationService implements CancellationServiceContract{
   private final FlightRepository flightRepository;

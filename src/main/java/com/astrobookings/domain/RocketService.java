@@ -2,10 +2,10 @@ package com.astrobookings.domain;
 
 import java.util.List;
 
+import com.astrobookings.domain.models.Rocket;
 import com.astrobookings.domain.models.RocketDto;
 import com.astrobookings.domain.ports.RocketRepository;
 import com.astrobookings.domain.ports.RocketServiceContract;
-import com.astrobookings.infrastructure.models.Rocket;
 
 public class RocketService implements RocketServiceContract {
     private final RocketRepository rocketRepository;

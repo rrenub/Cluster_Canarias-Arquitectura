@@ -7,9 +7,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.astrobookings.domain.models.Flight;
 import com.astrobookings.domain.ports.FlightServiceContract;
 import com.astrobookings.domain.ports.RocketServiceContract;
-import com.astrobookings.infrastructure.models.Flight;
 import com.sun.net.httpserver.HttpExchange;
 
 public class FlightHandler extends BaseHandler {
@@ -63,12 +63,18 @@ public class FlightHandler extends BaseHandler {
       InputStream is = exchange.getRequestBody();
       String body = new String(is.readAllBytes(), StandardCharsets.UTF_8);
 
-      // TODO: Validar objeto Flight DTO
-
       Flight flight = this.objectMapper.readValue(body, Flight.class);
 
-      Flight saved = flightService.createFlight(flight);
-      response = this.objectMapper.writeValueAsString(saved);
+      String error = validateFlight(flight);
+      if(error != null) {
+        statusCode = 400;
+        response = "{\"error\": \"" + error + "\"}";
+
+      } else {
+        Flight saved = flightService.createFlight(flight);
+        response = this.objectMapper.writeValueAsString(saved);
+      }
+
     } catch (IllegalArgumentException e) {
 
       // TODO: Excepción NotFound en lugar de parsear texto
@@ -85,6 +91,20 @@ public class FlightHandler extends BaseHandler {
     }
 
     sendResponse(exchange, statusCode, response);
+  }
+
+  private String validateFlight(Flight flight) {
+    if (flight.getRocketId() == null || flight.getRocketId().trim().isEmpty()) {
+      return "Rocket ID must be provided";
+    }
+    if (flight.getDepartureDate() == null) {
+      return "Departure date must be provided";
+    }
+    if (flight.getBasePrice() <= 0) {
+      return "Base price must be positive";
+    }
+
+    return null;
   }
 
   protected Map<String, String> parseQuery(String query) {

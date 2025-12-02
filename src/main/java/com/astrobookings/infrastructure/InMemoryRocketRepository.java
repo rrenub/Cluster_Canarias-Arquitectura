@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.astrobookings.domain.models.Rocket;
 import com.astrobookings.domain.ports.RocketRepository;
-import com.astrobookings.infrastructure.models.Rocket;
 
 public class InMemoryRocketRepository implements RocketRepository{
   private static final Map<String, Rocket> rockets = new HashMap<>();

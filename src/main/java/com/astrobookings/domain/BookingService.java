@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import com.astrobookings.domain.models.Booking;
+import com.astrobookings.domain.models.Flight;
+import com.astrobookings.domain.models.FlightStatus;
+import com.astrobookings.domain.models.Rocket;
 import com.astrobookings.domain.ports.BookingRepository;
 import com.astrobookings.domain.ports.BookingServiceContract;
 import com.astrobookings.domain.ports.FlightRepository;
 import com.astrobookings.domain.ports.PaymentGatewayContract;
 import com.astrobookings.domain.ports.RocketRepository;
-import com.astrobookings.infrastructure.models.Booking;
-import com.astrobookings.infrastructure.models.Flight;
-import com.astrobookings.infrastructure.models.FlightStatus;
-import com.astrobookings.infrastructure.models.Rocket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BookingService implements BookingServiceContract{

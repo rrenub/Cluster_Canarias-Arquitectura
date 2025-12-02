@@ -2,7 +2,7 @@ package com.astrobookings.domain.ports;
 
 import java.util.List;
 
-import com.astrobookings.infrastructure.models.Flight;
+import com.astrobookings.domain.models.Flight;
 
 public interface FlightRepository {
     public List<Flight> findAll();
