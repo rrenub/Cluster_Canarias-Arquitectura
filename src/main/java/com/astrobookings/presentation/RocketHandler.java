@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import com.astrobookings.business.interfaces.IRocketService;
-import com.astrobookings.business.models.RocketDto;
+import com.astrobookings.domain.models.RocketDto;
+import com.astrobookings.domain.ports.RocketServiceContract;
 import com.sun.net.httpserver.HttpExchange;
 
 public class RocketHandler extends BaseHandler {
-  private final IRocketService rocketService;
+  private final RocketServiceContract rocketService;
 
-  public RocketHandler(IRocketService rocketService) {
+  public RocketHandler(RocketServiceContract rocketService) {
     this.rocketService = rocketService;
   }
 

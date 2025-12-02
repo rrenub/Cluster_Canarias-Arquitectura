@@ -1,8 +1,8 @@
-package com.astrobookings.persistence.interfaces;
+package com.astrobookings.domain.ports;
 
 import java.util.List;
 
-import com.astrobookings.persistence.models.Rocket;
+import com.astrobookings.infrastructure.models.Rocket;
 
 public interface RocketRepository {
     public List<Rocket> findAll();

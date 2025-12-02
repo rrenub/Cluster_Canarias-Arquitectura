@@ -7,10 +7,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.astrobookings.business.BookingService;
-import com.astrobookings.persistence.BookingRepository;
-import com.astrobookings.persistence.FlightRepository;
-import com.astrobookings.persistence.InMemoryRocketRepository;
+import com.astrobookings.domain.BookingService;
+import com.astrobookings.infrastructure.BookingRepository;
+import com.astrobookings.infrastructure.FlightRepository;
+import com.astrobookings.infrastructure.InMemoryRocketRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.net.httpserver.HttpExchange;
 

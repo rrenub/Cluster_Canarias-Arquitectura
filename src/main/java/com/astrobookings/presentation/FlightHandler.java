@@ -7,10 +7,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.astrobookings.business.FlightService;
-import com.astrobookings.persistence.FlightRepository;
-import com.astrobookings.persistence.InMemoryRocketRepository;
-import com.astrobookings.persistence.models.Flight;
+import com.astrobookings.domain.FlightService;
+import com.astrobookings.infrastructure.FlightRepository;
+import com.astrobookings.infrastructure.InMemoryRocketRepository;
+import com.astrobookings.infrastructure.models.Flight;
 import com.sun.net.httpserver.HttpExchange;
 
 public class FlightHandler extends BaseHandler {

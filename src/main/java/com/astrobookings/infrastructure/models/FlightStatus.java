@@ -1,4 +1,4 @@
-package com.astrobookings.persistence.models;
+package com.astrobookings.infrastructure.models;
 
 public enum FlightStatus {
   SCHEDULED,

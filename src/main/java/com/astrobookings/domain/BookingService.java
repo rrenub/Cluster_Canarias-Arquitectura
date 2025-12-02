@@ -1,16 +1,16 @@
-package com.astrobookings.business;
+package com.astrobookings.domain;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import com.astrobookings.persistence.BookingRepository;
-import com.astrobookings.persistence.FlightRepository;
-import com.astrobookings.persistence.InMemoryRocketRepository;
-import com.astrobookings.persistence.models.Booking;
-import com.astrobookings.persistence.models.Flight;
-import com.astrobookings.persistence.models.FlightStatus;
-import com.astrobookings.persistence.models.Rocket;
+import com.astrobookings.infrastructure.BookingRepository;
+import com.astrobookings.infrastructure.FlightRepository;
+import com.astrobookings.infrastructure.InMemoryRocketRepository;
+import com.astrobookings.infrastructure.models.Booking;
+import com.astrobookings.infrastructure.models.Flight;
+import com.astrobookings.infrastructure.models.FlightStatus;
+import com.astrobookings.infrastructure.models.Rocket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BookingService {

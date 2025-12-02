@@ -1,9 +1,9 @@
 package com.astrobookings.config;
 
-import com.astrobookings.business.RocketService;
-import com.astrobookings.business.interfaces.RocketServiceContract;
-import com.astrobookings.persistence.InMemoryRocketRepository;
-import com.astrobookings.persistence.interfaces.RocketRepository;
+import com.astrobookings.domain.RocketService;
+import com.astrobookings.domain.ports.RocketRepository;
+import com.astrobookings.domain.ports.RocketServiceContract;
+import com.astrobookings.infrastructure.InMemoryRocketRepository;
 
 public class AppFactory {
 
