@@ -7,6 +7,7 @@ import java.util.List;
 import com.astrobookings.domain.ports.BookingRepository;
 import com.astrobookings.domain.ports.BookingServiceContract;
 import com.astrobookings.domain.ports.FlightRepository;
+import com.astrobookings.domain.ports.PaymentGatewayContract;
 import com.astrobookings.domain.ports.RocketRepository;
 import com.astrobookings.infrastructure.models.Booking;
 import com.astrobookings.infrastructure.models.Flight;
@@ -18,13 +19,15 @@ public class BookingService implements BookingServiceContract{
   private final BookingRepository bookingRepository;
   private final FlightRepository flightRepository;
   private final RocketRepository rocketRepository;
+  private final PaymentGatewayContract paymentGateway;
   private final ObjectMapper objectMapper = new ObjectMapper();
 
   public BookingService(BookingRepository bookingRepository, FlightRepository flightRepository,
-      RocketRepository rocketRepository) {
+      RocketRepository rocketRepository, PaymentGatewayContract paymentGateway) {
     this.bookingRepository = bookingRepository;
     this.flightRepository = flightRepository;
     this.rocketRepository = rocketRepository;
+    this.paymentGateway = paymentGateway;
   }
 
   public String createBooking(String flightId, String passengerName) throws Exception {
@@ -75,7 +78,7 @@ public class BookingService implements BookingServiceContract{
     double finalPrice = flight.getBasePrice() * (1 - discount);
 
     // Process payment
-    String transactionId = PaymentGateway.processPayment(finalPrice);
+    String transactionId = paymentGateway.processPayment(finalPrice);
 
     // Create booking
     Booking booking = new Booking();

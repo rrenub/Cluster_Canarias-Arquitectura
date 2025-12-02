@@ -4,19 +4,23 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import com.astrobookings.infrastructure.InMemoryBookingRepository;
-import com.astrobookings.infrastructure.InMemoryFlightRepository;
+import com.astrobookings.domain.ports.BookingRepository;
+import com.astrobookings.domain.ports.CancellationServiceContract;
+import com.astrobookings.domain.ports.FlightRepository;
+import com.astrobookings.domain.ports.PaymentGatewayContract;
 import com.astrobookings.infrastructure.models.Booking;
 import com.astrobookings.infrastructure.models.Flight;
 import com.astrobookings.infrastructure.models.FlightStatus;
 
-public class CancellationService {
-  private final InMemoryFlightRepository flightRepository;
-  private final InMemoryBookingRepository bookingRepository;
+public class CancellationService implements CancellationServiceContract{
+  private final FlightRepository flightRepository;
+  private final BookingRepository bookingRepository;
+  private final PaymentGatewayContract paymentGateway;
 
-  public CancellationService(InMemoryFlightRepository flightRepository, InMemoryBookingRepository bookingRepository) {
+  public CancellationService(FlightRepository flightRepository, BookingRepository bookingRepository, PaymentGatewayContract paymentGateway) {
     this.flightRepository = flightRepository;
     this.bookingRepository = bookingRepository;
+    this.paymentGateway = paymentGateway;
   }
 
   public String cancelFlights() throws Exception {
@@ -38,7 +42,7 @@ public class CancellationService {
 
             // Refund bookings
             for (Booking booking : bookings) {
-              PaymentGateway.processRefund(booking.getPaymentTransactionId(), booking.getFinalPrice());
+              paymentGateway.processRefund(booking.getPaymentTransactionId(), booking.getFinalPrice());
             }
 
             // Notify

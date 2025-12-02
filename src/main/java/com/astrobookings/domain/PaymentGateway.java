@@ -2,8 +2,10 @@ package com.astrobookings.domain;
 
 import java.util.UUID;
 
-public class PaymentGateway {
-  public static String processPayment(double amount) throws Exception {
+import com.astrobookings.domain.ports.PaymentGatewayContract;
+
+public class PaymentGateway implements PaymentGatewayContract {
+  public String processPayment(double amount) throws Exception {
     System.out.println("[PAYMENT GATEWAY] Processing payment... Amount: " + amount);
     if (amount > 10000) {
       throw new Exception("Payment FAILED - Amount exceeds limit");
@@ -13,11 +15,11 @@ public class PaymentGateway {
     return transactionId;
   }
 
-  public static void processRefund(String transactionId) {
+  public void processRefund(String transactionId) {
     System.out.println("[PAYMENT GATEWAY] Processing refund for transaction: " + transactionId);
   }
 
-  public static void processRefund(String transactionId, double amount) {
+  public void processRefund(String transactionId, double amount) {
     System.out.println("[PAYMENT GATEWAY] Processing refund for transaction " + transactionId + ": $" + amount);
     System.out.println("[PAYMENT GATEWAY] Refund successful for transaction " + transactionId);
   }
