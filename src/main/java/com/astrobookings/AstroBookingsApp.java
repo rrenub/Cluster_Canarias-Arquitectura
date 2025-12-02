@@ -3,7 +3,7 @@ package com.astrobookings;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import com.astrobookings.business.interfaces.IRocketService;
+import com.astrobookings.business.interfaces.RocketServiceContract;
 import com.astrobookings.config.AppFactory;
 import com.astrobookings.persistence.InMemoryRocketRepository;
 import com.astrobookings.persistence.interfaces.RocketRepository;
@@ -21,7 +21,7 @@ public class AstroBookingsApp {
     AppFactory appFactory = new AppFactory();
 
     // Create services
-    IRocketService rocketService = appFactory.createRocketService();
+    RocketServiceContract rocketService = appFactory.createRocketService();
 
     // Register handlers for endpoints
     server.createContext("/rockets", new RocketHandler(rocketService));
