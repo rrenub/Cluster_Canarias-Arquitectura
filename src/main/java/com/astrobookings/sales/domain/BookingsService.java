@@ -5,7 +5,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import com.astrobookings.fleets.domain.models.Rocket;
-import com.astrobookings.fleets.domain.ports.output.RocketRepository;
+// import com.astrobookings.fleets.domain.models.Rocket;
+// import com.astrobookings.fleets.domain.ports.output.RocketRepository;
 import com.astrobookings.sales.domain.models.Booking;
 import com.astrobookings.sales.domain.models.CreateBookingCommand;
 import com.astrobookings.sales.domain.models.Flight;
@@ -15,25 +16,26 @@ import com.astrobookings.sales.domain.ports.output.BookingRepository;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
 import com.astrobookings.sales.domain.ports.output.NotificationService;
 import com.astrobookings.sales.domain.ports.output.PaymentGateway;
+import com.astrobookings.sales.domain.ports.output.RocketsProvider;
 import com.astrobookings.shared.models.BusinessErrorCode;
 import com.astrobookings.shared.models.BusinessException;
 
 public class BookingsService implements BookingsUseCases {
   private final BookingRepository bookingRepository;
   private final FlightRepository flightRepository;
-  private final RocketRepository rocketRepository;
+  private final RocketsProvider rocketsPort;
   private final PaymentGateway paymentGateway;
   private final NotificationService notificationService;
 
   public BookingsService(
       BookingRepository bookingRepository,
       FlightRepository flightRepository,
-      RocketRepository rocketRepository,
+      RocketsProvider rocketsPort,
       PaymentGateway paymentGateway,
       NotificationService notificationService) {
     this.bookingRepository = bookingRepository;
     this.flightRepository = flightRepository;
-    this.rocketRepository = rocketRepository;
+    this.rocketsPort = rocketsPort;
     this.paymentGateway = paymentGateway;
     this.notificationService = notificationService;
   }
@@ -47,7 +49,7 @@ public class BookingsService implements BookingsUseCases {
       throw new BusinessException(BusinessErrorCode.VALIDATION, "Flight is not available for booking");
     }
 
-    Rocket rocket = rocketRepository.findById(flight.getRocketId());
+    Rocket rocket = rocketsPort.findById(flight.getRocketId());
     if (rocket == null) {
       throw new BusinessException(BusinessErrorCode.NOT_FOUND, "Rocket not found");
     }

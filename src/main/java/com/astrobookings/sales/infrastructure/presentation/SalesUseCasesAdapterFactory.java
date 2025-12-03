@@ -10,22 +10,23 @@ import com.astrobookings.sales.domain.ports.output.BookingRepository;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
 import com.astrobookings.sales.domain.ports.output.NotificationService;
 import com.astrobookings.sales.domain.ports.output.PaymentGateway;
+import com.astrobookings.sales.domain.ports.output.RocketsProvider;
 
 public class SalesUseCasesAdapterFactory {
     public static FlightsUseCases getFlightsUseCase(FlightRepository flightRepository,
-      RocketRepository rocketRepository) {
-        return new FlightsService(flightRepository, rocketRepository);
+      RocketsProvider rocketsPort) {
+        return new FlightsService(flightRepository, rocketsPort);
   }
 
   public static BookingsUseCases getBookingsUseCase(BookingRepository bookingRepository,
       FlightRepository flightRepository,
-      RocketRepository rocketRepository,
+      RocketsProvider rocketsPort,
       PaymentGateway paymentGateway,
       NotificationService notificationService) {
     return new BookingsService(
         bookingRepository,
         flightRepository,
-        rocketRepository,
+        rocketsPort,
         paymentGateway,
         notificationService);
   }

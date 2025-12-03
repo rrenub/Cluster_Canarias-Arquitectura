@@ -3,23 +3,25 @@ package com.astrobookings.sales.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.astrobookings.fleets.domain.models.Rocket;
 //import com.astrobookings.fleets.domain.models.Rocket;
 //import com.astrobookings.fleets.domain.ports.output.RocketRepository;
 import com.astrobookings.sales.domain.models.CreateFlightCommand;
 import com.astrobookings.sales.domain.models.Flight;
 import com.astrobookings.sales.domain.models.FlightStatus;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
+import com.astrobookings.sales.domain.ports.output.RocketsProvider;
 import com.astrobookings.shared.models.BusinessErrorCode;
 import com.astrobookings.shared.models.BusinessException;
 
 public class FlightsService implements com.astrobookings.sales.domain.ports.input.FlightsUseCases {
   private final FlightRepository flightRepository;
-  private final RocketRepository rocketRepository;
+  private final RocketsProvider rocketsPort;
   private static final int DEFAULT_MIN_PASSENGERS = 5;
 
-  public FlightsService(FlightRepository flightRepository, RocketRepository rocketRepository) {
+  public FlightsService(FlightRepository flightRepository, RocketsProvider rocketsPort) {
     this.flightRepository = flightRepository;
-    this.rocketRepository = rocketRepository;
+    this.rocketsPort = rocketsPort;
   }
 
   public List<Flight> getFlights(String statusFilter) {
@@ -51,7 +53,7 @@ public class FlightsService implements com.astrobookings.sales.domain.ports.inpu
       throw new BusinessException(BusinessErrorCode.VALIDATION, "Min passengers must be between 1 and 10");
     }
 
-    Rocket rocket = rocketRepository.findById(flight.getRocketId());
+    Rocket rocket = rocketsPort.findById(flight.getRocketId());
     if (rocket == null) {
       throw new BusinessException(BusinessErrorCode.NOT_FOUND,
           "Rocket with id " + flight.getRocketId() + " does not exist");

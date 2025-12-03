@@ -11,6 +11,8 @@ import com.astrobookings.sales.domain.ports.output.BookingRepository;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
 import com.astrobookings.sales.domain.ports.output.NotificationService;
 import com.astrobookings.sales.domain.ports.output.PaymentGateway;
+import com.astrobookings.sales.domain.ports.output.RocketsProvider;
+import com.astrobookings.sales.infrastructure.persistence.RocketsAdapter;
 import com.astrobookings.sales.infrastructure.persistence.SalesPersistenceAdapterFactory;
 import com.astrobookings.sales.infrastructure.presentation.SalesUseCasesAdapterFactory;
 
@@ -21,11 +23,13 @@ public class Config {
   static final PaymentGateway paymentGateway = SalesPersistenceAdapterFactory.getPaymentGateway();
   static final NotificationService notificationService = SalesPersistenceAdapterFactory.getNotificationService();
 
+  static final RocketsProvider rocketProvider = new RocketsAdapter(rocketRepository);
+
   static final RocketsUseCases rocketUseCase = FleetUseCasesAdapterFactory.getRocketsUseCase(rocketRepository);
   static final FlightsUseCases flightUseCase = SalesUseCasesAdapterFactory.getFlightsUseCase(
-      flightRepository, rocketRepository);
+      flightRepository, rocketProvider);
   static final BookingsUseCases bookingUseCase = SalesUseCasesAdapterFactory.getBookingsUseCase(
-      bookingRepository, flightRepository, rocketRepository,
+      bookingRepository, flightRepository, rocketProvider,
       paymentGateway,
       notificationService);
   static final CancellationUseCases cancellationUseCases = SalesUseCasesAdapterFactory.getCancellationService(

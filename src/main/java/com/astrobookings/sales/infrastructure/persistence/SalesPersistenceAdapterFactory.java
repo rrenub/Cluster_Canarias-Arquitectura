@@ -4,6 +4,7 @@ import com.astrobookings.sales.domain.ports.output.BookingRepository;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
 import com.astrobookings.sales.domain.ports.output.NotificationService;
 import com.astrobookings.sales.domain.ports.output.PaymentGateway;
+import com.astrobookings.sales.domain.ports.output.RocketsProvider;
 
 public class SalesPersistenceAdapterFactory {
   private static final FlightRepository flightRepository = new FlightInMemoryRepository();
