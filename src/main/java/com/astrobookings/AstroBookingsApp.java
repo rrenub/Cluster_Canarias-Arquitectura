@@ -3,10 +3,10 @@ package com.astrobookings;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import com.astrobookings.infrastructure.presentation.AdminHandler;
-import com.astrobookings.infrastructure.presentation.BookingsHandler;
-import com.astrobookings.infrastructure.presentation.FlightsHandler;
-import com.astrobookings.infrastructure.presentation.RocketsHandler;
+import com.astrobookings.fleets.infrastructure.presentation.RocketsHandler;
+import com.astrobookings.sales.infrastructure.presentation.AdminHandler;
+import com.astrobookings.sales.infrastructure.presentation.BookingsHandler;
+import com.astrobookings.sales.infrastructure.presentation.FlightsHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class AstroBookingsApp {
