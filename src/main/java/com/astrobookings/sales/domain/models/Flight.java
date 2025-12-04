@@ -2,9 +2,12 @@ package com.astrobookings.sales.domain.models;
 
 import java.time.LocalDateTime;
 
+import com.astrobookings.shared.models.BusinessErrorCode;
+import com.astrobookings.shared.models.BusinessException;
+
 public class Flight {
   private String id;
-  private String rocketId;
+  private RocketInfo rocket;
   private LocalDateTime departureDate;
   private double basePrice;
   private FlightStatus status;
@@ -13,15 +16,41 @@ public class Flight {
   public Flight() {
   }
 
-  public Flight(String id, String rocketId, LocalDateTime departureDate, double basePrice, FlightStatus status,
+  public Flight(String id, RocketInfo rocket, LocalDateTime departureDate, double basePrice, FlightStatus status,
       int minPassengers) {
     this.id = id;
-    this.rocketId = rocketId;
+    this.rocket = rocket;
     this.departureDate = departureDate;
     this.basePrice = basePrice;
     this.status = status;
     this.minPassengers = minPassengers;
   }
+
+  public void validate() throws IllegalArgumentException {
+    if (this.rocket == null) {
+      throw new BusinessException(BusinessErrorCode.NOT_FOUND, "Rocket for flight does not exists");
+    }
+
+    if (this.basePrice <= 0) {
+      throw new BusinessException(BusinessErrorCode.VALIDATION, "Base price must be positive");
+    }
+
+    if (this.minPassengers <= 0 || this.minPassengers > 10) {
+      throw new BusinessException(BusinessErrorCode.VALIDATION, "Min passengers must be between 1 and 10");
+    }
+
+    LocalDateTime now = LocalDateTime.now();
+    if (!this.departureDate.isAfter(now)) {
+      throw new BusinessException(BusinessErrorCode.VALIDATION, "Departure date must be in the future");
+    }
+
+    LocalDateTime oneYearAhead = now.plusYears(1);
+    if (this.departureDate.isAfter(oneYearAhead)) {
+      throw new BusinessException(BusinessErrorCode.VALIDATION, "Departure date cannot be more than 1 year ahead");
+    }
+  }
+
+  // Getter & Setters
 
   public String getId() {
     return id;
@@ -31,12 +60,12 @@ public class Flight {
     this.id = id;
   }
 
-  public String getRocketId() {
-    return rocketId;
+  public RocketInfo getRocketInfo() {
+    return rocket;
   }
 
-  public void setRocketId(String rocketId) {
-    this.rocketId = rocketId;
+  public void setRocketInfo(RocketInfo rocket) {
+    this.rocket = rocket;
   }
 
   public LocalDateTime getDepartureDate() {

@@ -50,7 +50,7 @@ public class BookingsService implements BookingsUseCases {
       throw new BusinessException(BusinessErrorCode.VALIDATION, "Flight is not available for booking");
     }
 
-    RocketInfo rocket = rocketsPort.findById(flight.getRocketId());
+    RocketInfo rocket = rocketsPort.findById(flight.getRocketInfo().getId());
     if (rocket == null) {
       throw new BusinessException(BusinessErrorCode.NOT_FOUND, "Rocket not found");
     }

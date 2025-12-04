@@ -16,6 +16,6 @@ public class RocketsAdapter implements RocketsProvider {
     @Override
     public RocketInfo findById(String id) {
         Rocket rocket = rocketRepository.findById(id);
-        return new RocketInfo(rocket.getCapacity());
+        return new RocketInfo(id, rocket.getCapacity());
     }
 }

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import com.astrobookings.sales.domain.models.Flight;
 import com.astrobookings.sales.domain.models.FlightStatus;
+import com.astrobookings.sales.domain.models.RocketInfo;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
 
 public class FlightInMemoryRepository implements FlightRepository {
@@ -16,15 +17,16 @@ public class FlightInMemoryRepository implements FlightRepository {
   private static int nextId = 1;
 
   static {
-    var rocketId = "r1";
     // Pre-load flights
     var flight1Id = "f1";
-    Flight flight1 = new Flight(flight1Id, rocketId, LocalDateTime.of(2026, 6, 1, 10, 0),
+    var rocketInfo1 = new RocketInfo("r1", 10);
+    Flight flight1 = new Flight(flight1Id, rocketInfo1, LocalDateTime.of(2026, 6, 1, 10, 0),
         1000.0, FlightStatus.SCHEDULED, 5);
     flights.put(flight1Id, flight1);
 
     var flight2Id = "f2";
-    Flight flight2 = new Flight(flight2Id, rocketId, LocalDateTime.of(2026, 12, 1, 10, 0),
+    var rocketInfo2 = new RocketInfo("r2", 5);
+    Flight flight2 = new Flight(flight2Id, rocketInfo2, LocalDateTime.of(2026, 12, 1, 10, 0),
         2000.0, FlightStatus.CANCELLED, 5);
     flights.put(flight2Id, flight2);
 
