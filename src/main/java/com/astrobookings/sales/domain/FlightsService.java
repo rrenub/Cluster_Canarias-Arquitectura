@@ -9,6 +9,7 @@ import com.astrobookings.fleets.domain.models.Rocket;
 import com.astrobookings.sales.domain.models.CreateFlightCommand;
 import com.astrobookings.sales.domain.models.Flight;
 import com.astrobookings.sales.domain.models.FlightStatus;
+import com.astrobookings.sales.domain.models.RocketInfo;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
 import com.astrobookings.sales.domain.ports.output.RocketsProvider;
 import com.astrobookings.shared.models.BusinessErrorCode;
@@ -53,7 +54,7 @@ public class FlightsService implements com.astrobookings.sales.domain.ports.inpu
       throw new BusinessException(BusinessErrorCode.VALIDATION, "Min passengers must be between 1 and 10");
     }
 
-    Rocket rocket = rocketsPort.findById(flight.getRocketId());
+    RocketInfo rocket = rocketsPort.findById(flight.getRocketId());
     if (rocket == null) {
       throw new BusinessException(BusinessErrorCode.NOT_FOUND,
           "Rocket with id " + flight.getRocketId() + " does not exist");

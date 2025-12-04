@@ -11,6 +11,7 @@ import com.astrobookings.sales.domain.models.Booking;
 import com.astrobookings.sales.domain.models.CreateBookingCommand;
 import com.astrobookings.sales.domain.models.Flight;
 import com.astrobookings.sales.domain.models.FlightStatus;
+import com.astrobookings.sales.domain.models.RocketInfo;
 import com.astrobookings.sales.domain.ports.input.BookingsUseCases;
 import com.astrobookings.sales.domain.ports.output.BookingRepository;
 import com.astrobookings.sales.domain.ports.output.FlightRepository;
@@ -49,7 +50,7 @@ public class BookingsService implements BookingsUseCases {
       throw new BusinessException(BusinessErrorCode.VALIDATION, "Flight is not available for booking");
     }
 
-    Rocket rocket = rocketsPort.findById(flight.getRocketId());
+    RocketInfo rocket = rocketsPort.findById(flight.getRocketId());
     if (rocket == null) {
       throw new BusinessException(BusinessErrorCode.NOT_FOUND, "Rocket not found");
     }

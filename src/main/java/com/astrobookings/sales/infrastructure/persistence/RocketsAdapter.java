@@ -2,6 +2,7 @@ package com.astrobookings.sales.infrastructure.persistence;
 
 import com.astrobookings.fleets.domain.models.Rocket;
 import com.astrobookings.fleets.domain.ports.output.RocketRepository;
+import com.astrobookings.sales.domain.models.RocketInfo;
 import com.astrobookings.sales.domain.ports.output.RocketsProvider;
 
 public class RocketsAdapter implements RocketsProvider {
@@ -13,8 +14,8 @@ public class RocketsAdapter implements RocketsProvider {
     }
 
     @Override
-    public Rocket findById(String id) {
-        return rocketRepository.findById(id);
+    public RocketInfo findById(String id) {
+        Rocket rocket = rocketRepository.findById(id);
+        return new RocketInfo(rocket.getCapacity());
     }
-    
 }

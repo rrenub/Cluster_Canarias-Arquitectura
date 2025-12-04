@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.astrobookings.fleets.domain.models.Rocket;
+import com.astrobookings.fleets.domain.models.RocketCapacity;
 import com.astrobookings.fleets.domain.ports.output.RocketRepository;
 
 public class RocketInMemoryRepository implements RocketRepository {
@@ -15,7 +16,8 @@ public class RocketInMemoryRepository implements RocketRepository {
   static {
     // Pre-load one rocket
     var rocketId = "r1";
-    Rocket falcon9 = new Rocket(rocketId, "Falcon 9", 7, 27000.0);
+    RocketCapacity capacity = new RocketCapacity(7);
+    Rocket falcon9 = new Rocket(rocketId, "Falcon 9", capacity, 27000.0);
     rockets.put(rocketId, falcon9);
     nextId = 2;
   }
